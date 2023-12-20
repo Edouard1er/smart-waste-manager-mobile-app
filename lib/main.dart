@@ -46,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        // title: Text('Gestion des Déchets'),
+      ),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -79,6 +81,75 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.black,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.map),
+              title: Text('Carte'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 0; // Index de l'écran de la carte
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.calendar_today),
+              title: Text('Calendrier'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 1; // Index de l'écran du calendrier
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.group),
+              title: Text('Communauté'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 2; // Index de l'écran de la communauté
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.lightbulb),
+              title: Text('Éducation'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 3; // Index de l'écran de l'éducation
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Profil'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 4; // Index de l'écran du profil
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
