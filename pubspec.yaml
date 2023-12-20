@@ -32,6 +32,8 @@ dependencies:
     sdk: flutter
 
   google_maps_flutter: ^2.5.0
+  table_calendar: ^3.0.9
+  flutter_local_notifications: ^16.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
