@@ -50,9 +50,9 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Carte Interactive'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Carte Interactive'),
+      // ),
       body: GoogleMap(
         onMapCreated: (controller) {
           setState(() {
