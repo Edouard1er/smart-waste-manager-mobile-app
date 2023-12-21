@@ -4,6 +4,7 @@ import 'package:smart_waste_manager_mobile_app/screens/community_screen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/education_screen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/home_screen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/map_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/order_tracking_page.dart';
 import 'package:smart_waste_manager_mobile_app/screens/report_screen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/settings_screen.dart';
 import 'package:smart_waste_manager_mobile_app/widgets/collection_calendar_widget.dart';
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     MapScreen(),
     CollectionCalendar(),
     CommunityScreen(),
-    EducationScreen(),
+    OrderTrackingPage(),
     SettingsScreen(),
   ];
 

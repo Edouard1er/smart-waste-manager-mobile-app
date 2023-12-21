@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_waste_manager_mobile_app/models/waste_bin.dart';
 import 'package:smart_waste_manager_mobile_app/screens/next_collection_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/order_tracking_page.dart';
 import 'package:smart_waste_manager_mobile_app/screens/report_screen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/routes_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/test_route_screen.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -145,7 +147,7 @@ class _MapScreenState extends State<MapScreen> {
                 Navigator.of(context).pop(); // Fermer la boîte de dialogue actuelle
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NextCollectScreen(wasteBins: wasteBins)),
+                  MaterialPageRoute(builder: (context) => OrderTrackingPage()),
                 );
               },
               child: Text('Signaler quelque chose'),

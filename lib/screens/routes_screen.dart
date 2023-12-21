@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -38,9 +37,9 @@ class _RoutesScreenState extends State<RoutesScreen> {
         polylines: {
           Polyline(
             polylineId: PolylineId('route'),
-            color: Colors.blue,
+            color: Colors.red,
             points: polylineCoordinates,
-            width: 5,
+            width: 6,
           ),
         },
       ),
@@ -70,18 +69,28 @@ class _RoutesScreenState extends State<RoutesScreen> {
   }
 
   Future<void> _getOptimalRoute() async {
-    for (int i = 0; i < wasteBins.length - 1; i++) {
+    try {
+      List<PolylineWayPoint> wayPoints = [];
+
+      for (var bin in wasteBins) {
+        wayPoints.add(PolylineWayPoint(location: "${bin.latitude},${bin.longitude}"));
+      }
+
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        'your_google_maps_api_key',
-        PointLatLng(wasteBins[i].latitude, wasteBins[i].longitude),
-        PointLatLng(wasteBins[i + 1].latitude, wasteBins[i + 1].longitude),
+        'votre_cle_api_google_maps',
+        PointLatLng(wasteBins.first.latitude, wasteBins.first.longitude),
+        PointLatLng(wasteBins.last.latitude, wasteBins.last.longitude),
+        wayPoints: wayPoints,
         travelMode: TravelMode.driving,
       );
 
-      // Draw segment of the route on the map
+      // Draw the route on the map
       _updatePolyline(result);
+    } catch (e) {
+      print('Erreur lors de la récupération de l\'itinéraire : $e');
     }
   }
+
 
   void _updatePolyline(PolylineResult result) {
     setState(() {
@@ -93,6 +102,3 @@ class _RoutesScreenState extends State<RoutesScreen> {
     });
   }
 }
-
-
-
