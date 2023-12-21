@@ -16,44 +16,44 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
   final Completer<GoogleMapController> _controller = Completer();
 
   static const LatLng sourceLocation = LatLng(37.4221, -122.0852);
+  static const LatLng middle = LatLng(37.4177903, -122.0781);
   static const LatLng destination = LatLng(37.4116, -122.07713);
 
-  // static const LatLng sourceLocation = LatLng(37.33500926, -122.03272188);
-  // static const LatLng destination = LatLng(37.33429383, -122.06600055);
 
   List<LatLng> polylineCoordinates = [];
 
   LocationData? currentLocation;
 
-  void getCurrentLocation() async {
-    Location location = Location();
+  // Initialiser la classe Location
+  Location location = Location();
 
+  // Fonction pour récupérer la localisation actuelle
+  void getCurrentLocation() async {
     try {
-      print("gggggoooooddd==============================================");
+      // Récupérer la localisation actuelle
       currentLocation = await location.getLocation();
-      print(currentLocation);
-      print("yyyyyeeeessss==============================================");
-    } on Exception {
-      print("==============================================");
-      print(Exception);
+      print('Current Location: ${currentLocation?.latitude}, ${currentLocation?.longitude}');
+    } catch (e) {
+      print('Erreur lors de la récupération de la localisation: $e');
       currentLocation = null;
-      print("==============================================");
     }
 
+    // Écouter les changements de localisation en temps réel
     location.onLocationChanged.listen((LocationData currentLocation1) {
-      print(currentLocation1.latitude);
-      print(currentLocation1.longitude);
-      print("==============================================");
+      print('Real-time Location: ${currentLocation1.latitude}, ${currentLocation1.longitude}');
+      // Mettez à jour la localisation actuelle
       setState(() {
         currentLocation = currentLocation1;
       });
     });
   }
 
+  // Fonction pour récupérer les points de l'itinéraire entre la source et la destination
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
 
     try {
+      // Récupérer l'itinéraire entre la source et la destination
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         'AIzaSyDNXk-PYESNlN5Cm7NPEoGUg_WQS-xFdc4', // Remplacez par votre propre clé API Google Maps
         PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
@@ -61,22 +61,26 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
         travelMode: TravelMode.driving,
       );
 
+      // Vérifier s'il y a des points dans l'itinéraire
       if (result.points.isNotEmpty) {
         result.points.forEach((PointLatLng point) {
+          // Ajouter les points à la liste des coordonnées du Polyline
           polylineCoordinates.add(LatLng(point.latitude, point.longitude));
         });
+        // Mettre à jour l'affichage
         setState(() {});
       } else {
         print('Aucun point trouvé.');
       }
     } catch (e) {
-      print('Erreur lors de la récupération des points de la route: $e');
+      print('Erreur lors de la récupération des points de l\'itinéraire: $e');
     }
   }
 
   @override
   void initState() {
     super.initState();
+    // Appeler les fonctions d'initialisation
     getPolyPoints();
     getCurrentLocation();
   }
@@ -89,7 +93,7 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
       ),
       body: currentLocation == null
           ? const Center(child: CircularProgressIndicator())
-        : GoogleMap(
+          : GoogleMap(
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
@@ -99,8 +103,8 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
             currentLocation!.longitude!,
           ),
           zoom: 14.0,
-          // Essayez une valeur inférieure à 10.5
         ),
+        // Afficher le Polyline sur la carte
         polylines: {
           Polyline(
             polylineId: PolylineId('route'),
@@ -108,30 +112,31 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
             points: polylineCoordinates,
           ),
         },
+        // Afficher les marqueurs sur la carte
         markers: {
           Marker(
-            markerId: const  MarkerId('currentLocation'),
+            markerId: const MarkerId('currentLocation'),
             position: LatLng(
               currentLocation!.latitude!,
               currentLocation!.longitude!,
             ),
             infoWindow: const InfoWindow(
               title: 'Ma position actuelle',
-            )
+            ),
           ),
           const Marker(
             markerId: MarkerId('source'),
             position: sourceLocation,
             infoWindow: InfoWindow(
               title: 'sourceLocation',
-            )
+            ),
           ),
           const Marker(
             markerId: MarkerId('destination'),
             position: destination,
             infoWindow: InfoWindow(
               title: 'destination',
-            )
+            ),
           ),
         },
       ),
