@@ -12,6 +12,6 @@ class WasteBin {
     required this.longitude,
     required this.fillLevel,
     required this.nextCollectionDate,
-    required this.status,
+    required  this.status,
   });
 }
