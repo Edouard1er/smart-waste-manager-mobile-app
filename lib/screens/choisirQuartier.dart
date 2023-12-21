@@ -1,0 +1,111 @@
+import 'package:flutter/material.dart';
+import 'package:smart_waste_manager_mobile_app/models/waste_bin.dart';
+import 'package:smart_waste_manager_mobile_app/screens/settings_screen.dart';
+
+class ChoixQuartier extends StatefulWidget {
+  final List<WasteBin> wasteBins;
+
+  ChoixQuartier({required this.wasteBins});
+
+  @override
+  _ChoixQuartierState createState() => _ChoixQuartierState();
+}
+
+class _ChoixQuartierState extends State<ChoixQuartier> {
+  String? selectedValue; // Déclarez la variable selectedValue
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Choisir Quartier'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SettingsScreen()),
+            );
+          },
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'SMART WAB',
+              style: TextStyle(
+                fontSize: 36.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+            SizedBox(height: 190.0), // Espace
+
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text(
+                'Choisir Un Quartier',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+
+            Container(
+              width: 200.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(color: Colors.green),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  underline: Container(),
+                  value: selectedValue,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedValue =
+                          newValue; // Mettez à jour la valeur sélectionnée
+                    });
+                  },
+                  items: <String>['Option 1', 'Option 2', 'Option 3']
+                      .map<DropdownMenuItem<String>>((String valuee) {
+                    return DropdownMenuItem<String>(
+                      value: valuee,
+                      child: Text(valuee),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+            SizedBox(height: 30.0), // Espace
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                fixedSize: Size(200.0, 50.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  side: BorderSide(color: Colors.green),
+                ),
+              ),
+              onPressed: () {
+                // Action du bouton "AGENT"
+                // Vous pouvez définir le comportement souhaité ici
+              },
+              child: Text(
+                'AGENT',
+                style: TextStyle(color: Colors.green),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

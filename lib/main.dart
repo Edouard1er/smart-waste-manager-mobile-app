@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     MapScreen(),
     CollectionCalendar(),
     CommunityScreen(),
-    EducationScreen(),
+    ReportScreen(),
     SettingsScreen(),
   ];
 

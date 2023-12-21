@@ -8,7 +8,7 @@ class ReportScreen extends StatefulWidget {
 class _ReportScreenState extends State<ReportScreen> {
   TextEditingController _descriptionController = TextEditingController();
   List<String> _photos = [];
-
+  String? selectedValue;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +19,63 @@ class _ReportScreenState extends State<ReportScreen> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
+            Center(
+              child: Text(
+                'SMART WAB',
+                style: TextStyle(
+                  fontSize: 36.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              ),
+            ),
+            SizedBox(height: 30.0),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    'Etat :',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10.0), // Espace entre les deux éléments
+                Container(
+                  width: 290.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color: Colors.green),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      underline: Container(),
+                      value: selectedValue,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedValue =
+                              newValue; // Mettez à jour la valeur sélectionnée
+                        });
+                      },
+                      items: <String>['Endommager', 'Option 2', 'Option 3']
+                          .map<DropdownMenuItem<String>>((String valuee) {
+                        return DropdownMenuItem<String>(
+                          value: valuee,
+                          child: Text(valuee),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            
+            SizedBox(height: 50.0),
             TextFormField(
               controller: _descriptionController,
               decoration: InputDecoration(labelText: 'Description du problème'),
@@ -76,4 +133,3 @@ class _ReportScreenState extends State<ReportScreen> {
     // Envoyez la description et les photos au backend ou effectuez d'autres actions nécessaires
   }
 }
-
