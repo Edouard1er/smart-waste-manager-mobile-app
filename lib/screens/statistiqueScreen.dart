@@ -11,7 +11,7 @@ class Statistique extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Calculez le nombre total de poubelles et le nombre de poubelles endommagées
-
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Statistique'),
