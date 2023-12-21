@@ -5,6 +5,8 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
+import '../widgets/collect_map_info_widget.dart';
+
 class OrderTrackingPage extends StatefulWidget {
   const OrderTrackingPage({Key? key}) : super(key: key);
 
@@ -15,22 +17,19 @@ class OrderTrackingPage extends StatefulWidget {
 class OrderTrackingPageState extends State<OrderTrackingPage> {
   final Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng sourceLocation = LatLng(37.4221, -122.0852);
-  static const LatLng middle = LatLng(37.4177903, -122.0781);
-  static const LatLng destination = LatLng(37.4116, -122.07713);
+  List<LatLng> destinations = [
+    LatLng(37.4116, -122.07713),
+    LatLng(37.42, -122.08),
+    LatLng(37.43, -122.09),
+    // Ajoutez d'autres destinations au besoin
+  ];
 
-
-  List<LatLng> polylineCoordinates = [];
-
+  List<Polyline> polylines = [];
   LocationData? currentLocation;
-
-  // Initialiser la classe Location
   Location location = Location();
 
-  // Fonction pour récupérer la localisation actuelle
   void getCurrentLocation() async {
     try {
-      // Récupérer la localisation actuelle
       currentLocation = await location.getLocation();
       print('Current Location: ${currentLocation?.latitude}, ${currentLocation?.longitude}');
     } catch (e) {
@@ -38,40 +37,43 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
       currentLocation = null;
     }
 
-    // Écouter les changements de localisation en temps réel
     location.onLocationChanged.listen((LocationData currentLocation1) {
       print('Real-time Location: ${currentLocation1.latitude}, ${currentLocation1.longitude}');
-      // Mettez à jour la localisation actuelle
       setState(() {
         currentLocation = currentLocation1;
       });
     });
   }
 
-  // Fonction pour récupérer les points de l'itinéraire entre la source et la destination
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
 
     try {
-      // Récupérer l'itinéraire entre la source et la destination
-      PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        'AIzaSyDNXk-PYESNlN5Cm7NPEoGUg_WQS-xFdc4', // Remplacez par votre propre clé API Google Maps
-        PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
-        PointLatLng(destination.latitude, destination.longitude),
-        travelMode: TravelMode.driving,
-      );
+      for (int i = 0; i < destinations.length - 1; i++) {
+        PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+          'AIzaSyDNXk-PYESNlN5Cm7NPEoGUg_WQS-xFdc4',
+          PointLatLng(destinations[i].latitude, destinations[i].longitude),
+          PointLatLng(destinations[i + 1].latitude, destinations[i + 1].longitude),
+          travelMode: TravelMode.driving,
+        );
 
-      // Vérifier s'il y a des points dans l'itinéraire
-      if (result.points.isNotEmpty) {
-        result.points.forEach((PointLatLng point) {
-          // Ajouter les points à la liste des coordonnées du Polyline
-          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-        });
-        // Mettre à jour l'affichage
-        setState(() {});
-      } else {
-        print('Aucun point trouvé.');
+        if (result.points.isNotEmpty) {
+          List<LatLng> currentPolylineCoordinates = [];
+          result.points.forEach((PointLatLng point) {
+            currentPolylineCoordinates.add(LatLng(point.latitude, point.longitude));
+          });
+
+          polylines.add(Polyline(
+            polylineId: PolylineId('route$i'),
+            color: Colors.black,
+            points: currentPolylineCoordinates,
+          ));
+        } else {
+          print('Aucun point trouvé pour l\'itinéraire $i.');
+        }
       }
+
+      setState(() {});
     } catch (e) {
       print('Erreur lors de la récupération des points de l\'itinéraire: $e');
     }
@@ -80,7 +82,6 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
   @override
   void initState() {
     super.initState();
-    // Appeler les fonctions d'initialisation
     getPolyPoints();
     getCurrentLocation();
   }
@@ -91,9 +92,13 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
       appBar: AppBar(
         title: Text('Order Tracking'),
       ),
-      body: currentLocation == null
+      body:
+      Stack(
+      children: [
+      currentLocation == null
           ? const Center(child: CircularProgressIndicator())
           : GoogleMap(
+        zoomGesturesEnabled: true,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
@@ -104,15 +109,7 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
           ),
           zoom: 14.0,
         ),
-        // Afficher le Polyline sur la carte
-        polylines: {
-          Polyline(
-            polylineId: PolylineId('route'),
-            color: Colors.black,
-            points: polylineCoordinates,
-          ),
-        },
-        // Afficher les marqueurs sur la carte
+        polylines: Set<Polyline>.from(polylines),
         markers: {
           Marker(
             markerId: const MarkerId('currentLocation'),
@@ -124,22 +121,33 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
               title: 'Ma position actuelle',
             ),
           ),
-          const Marker(
-            markerId: MarkerId('source'),
-            position: sourceLocation,
-            infoWindow: InfoWindow(
-              title: 'sourceLocation',
+          for (int i = 0; i < destinations.length; i++)
+            Marker(
+              markerId: MarkerId('destination$i'),
+              position: destinations[i],
+              infoWindow: InfoWindow(
+                title: 'destination $i',
+              ),
             ),
-          ),
-          const Marker(
-            markerId: MarkerId('destination'),
-            position: destination,
-            infoWindow: InfoWindow(
-              title: 'destination',
-            ),
-          ),
         },
+        zoomControlsEnabled: true,
+
       ),
+      Positioned(
+        bottom: 0,
+        left: 0,
+        right: 0,
+        child: CollectMapInfoWidget(
+          distance: '5km',
+          time: '5',
+          totalPoubelle: 6,
+          totalMaison: 7,
+          totalEndomage: 2,
+          score: 2,
+        ),
+      ),
+      ],
+      )
     );
   }
 }
