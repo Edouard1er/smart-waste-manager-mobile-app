@@ -15,8 +15,11 @@ class OrderTrackingPage extends StatefulWidget {
 class OrderTrackingPageState extends State<OrderTrackingPage> {
   final Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng sourceLocation = LatLng(37.33500926, -122.0327188);
-  static const LatLng destination = LatLng(37.3329383, -122.30600055);
+  static const LatLng sourceLocation = LatLng(37.4221, -122.0852);
+  static const LatLng destination = LatLng(37.4116, -122.07713);
+
+  // static const LatLng sourceLocation = LatLng(37.33500926, -122.03272188);
+  // static const LatLng destination = LatLng(37.33429383, -122.06600055);
 
   List<LatLng> polylineCoordinates = [];
 
@@ -26,10 +29,25 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
     Location location = Location();
 
     try {
+      print("gggggoooooddd==============================================");
       currentLocation = await location.getLocation();
+      print(currentLocation);
+      print("yyyyyeeeessss==============================================");
     } on Exception {
+      print("==============================================");
+      print(Exception);
       currentLocation = null;
+      print("==============================================");
     }
+
+    location.onLocationChanged.listen((LocationData currentLocation1) {
+      print(currentLocation1.latitude);
+      print(currentLocation1.longitude);
+      print("==============================================");
+      setState(() {
+        currentLocation = currentLocation1;
+      });
+    });
   }
 
   void getPolyPoints() async {
@@ -80,7 +98,8 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
             currentLocation!.latitude!,
             currentLocation!.longitude!,
           ),
-          zoom: 10.0, // Essayez une valeur inférieure à 10.5
+          zoom: 14.0,
+          // Essayez une valeur inférieure à 10.5
         ),
         polylines: {
           Polyline(
@@ -95,15 +114,24 @@ class OrderTrackingPageState extends State<OrderTrackingPage> {
             position: LatLng(
               currentLocation!.latitude!,
               currentLocation!.longitude!,
+            ),
+            infoWindow: const InfoWindow(
+              title: 'Ma position actuelle',
             )
           ),
-          Marker(
+          const Marker(
             markerId: MarkerId('source'),
             position: sourceLocation,
+            infoWindow: InfoWindow(
+              title: 'sourceLocation',
+            )
           ),
-          Marker(
+          const Marker(
             markerId: MarkerId('destination'),
             position: destination,
+            infoWindow: InfoWindow(
+              title: 'destination',
+            )
           ),
         },
       ),
