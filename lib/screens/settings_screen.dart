@@ -3,6 +3,7 @@ import 'package:smart_waste_manager_mobile_app/screens/Bienvenu.dart';
 import 'package:smart_waste_manager_mobile_app/screens/BienvenuPhon.dart';
 import 'package:smart_waste_manager_mobile_app/screens/agentMatricule.dart';
 import 'package:smart_waste_manager_mobile_app/screens/choisirQuartier.dart';
+import 'package:smart_waste_manager_mobile_app/screens/statistiqueScreen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/ville_collection.dart';
 import 'package:smart_waste_manager_mobile_app/widgets/confirmation_dialog_widget.dart';
 import 'package:smart_waste_manager_mobile_app/models/waste_bin.dart';
@@ -109,6 +110,19 @@ class SettingsScreen extends StatelessWidget {
                   context,
                   // MaterialPageRoute(builder: (context) => NextCollectScreen(wasteBins: wasteBins)),
                     MaterialPageRoute(builder: (context) => AgentMatricule(wasteBins: wasteBins)),
+                );
+                // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
+              },
+            ),
+              ListTile(
+              title: Text('Statistique'),
+              subtitle: Text('Configurer les rappels de collecte'),
+              onTap: () {
+                  Navigator.of(context).pop(); // Fermer la boîte de dialogue actuelle
+                Navigator.push(
+                  context,
+                  // MaterialPageRoute(builder: (context) => NextCollectScreen(wasteBins: wasteBins)),
+                    MaterialPageRoute(builder: (context) => Statistique(wasteBins: wasteBins)),
                 );
                 // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
               },

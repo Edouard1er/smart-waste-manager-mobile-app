@@ -7,7 +7,6 @@ import 'package:smart_waste_manager_mobile_app/screens/map_screen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/report_screen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/settings_screen.dart';
 import 'package:smart_waste_manager_mobile_app/widgets/collection_calendar_widget.dart';
-
 import 'package:flutter/material.dart';
 
 void main() {

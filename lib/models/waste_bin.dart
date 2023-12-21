@@ -14,4 +14,6 @@ class WasteBin {
     required this.nextCollectionDate,
     required  this.status,
   });
+
+  get isDamaged => null;
 }
