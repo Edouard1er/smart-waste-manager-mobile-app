@@ -9,6 +9,9 @@ class _ReportScreenState extends State<ReportScreen> {
   TextEditingController _descriptionController = TextEditingController();
   List<String> _photos = [];
   String? selectedValue;
+  bool option1Value = false;
+  bool option2Value = false;
+  bool option3Value = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +32,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 30.0),
+            SizedBox(height: 25.0),
             Row(
               children: [
                 Padding(
@@ -73,26 +76,63 @@ class _ReportScreenState extends State<ReportScreen> {
                 ),
               ],
             ),
+            SizedBox(height: 5.0),
+            // Liste de CheckBox
+            CheckboxListTile(
+              title: Text('Option 1'),
+              value: option1Value,
+              onChanged: (bool? value) {
+                setState(() {
+                  option1Value = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Option 2'),
+              value: option2Value,
+              onChanged: (bool? value) {
+                setState(() {
+                  option2Value = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Option 3'),
+              value: option3Value,
+              onChanged: (bool? value) {
+                setState(() {
+                  option3Value = value!;
+                });
+              },
+            ),
+            SizedBox(height: 0.0),
 
-            
-            SizedBox(height: 50.0),
             TextFormField(
               controller: _descriptionController,
               decoration: InputDecoration(labelText: 'Description du problème'),
               maxLines: 3,
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 1.0),
             Text('Ajouter des photos pour clarification'),
-            SizedBox(height: 8.0),
+            SizedBox(height: 0.0),
             _buildPhotoList(),
-            SizedBox(height: 8.0),
+            SizedBox(height: 0.0),
             ElevatedButton(
               onPressed: _takePhoto,
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white, // Couleur de l'arrière-plan du bouton
+                onPrimary: Colors.black, // Couleur du texte
+                side: BorderSide(color: Colors.green), // Bordure verte
+              ),
               child: Text('Prendre une photo'),
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 1.0),
             ElevatedButton(
               onPressed: _submitReport,
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green, // Couleur de l'arrière-plan du bouton
+                onPrimary: Colors.white, // Couleur du texte
+              ),
               child: Text('Soumettre le Signalement'),
             ),
           ],
