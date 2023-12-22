@@ -27,6 +27,28 @@ class CollecteurItem extends StatelessWidget {
               icon: Icon(Icons.delete),
               onPressed: () {
                 // Afficher une boîte de dialogue de confirmation pour la suppression (comme précédemment)
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('Supprimer le collecteur'),
+                    content: Text('Êtes-vous sûr de vouloir supprimer ce collecteur ?'),
+                    actions: [
+                      TextButton(
+                        child: Text('Annuler'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      TextButton(
+                        child: Text('Supprimer'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          onDelete(collecteur.id ?? '');
+                        },
+                      ),
+                    ],
+                  ),
+                );
               },
             ),
           ],
