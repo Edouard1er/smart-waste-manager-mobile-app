@@ -25,61 +25,64 @@ class Statistique extends StatelessWidget {
           },
         ),
       ),
-      body: Padding(
-        
-        padding: const EdgeInsets.all(60.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          
-          children: [
-            Center(
-              child: Text(
-                'SMART WAB',
-                style: TextStyle(
-                  fontSize: 36.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
+      body: SingleChildScrollView(
+        child:  Padding(
+
+          padding: const EdgeInsets.all(60.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              Center(
+                child: Text(
+                  'SMART WAB',
+                  style: TextStyle(
+                    fontSize: 36.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 90.0),
-            Text('Nombre Poubelle : 90'),
-            SizedBox(height: 16.0),
-            Text('Nombre Poubelle Endommager: 40 '),
-            SizedBox(height: 16.0),
-            // Ajoutez ici le graphique (par exemple, PieChart)
-            Container(
-              height: 300.0,
-              child: PieChart(
-                PieChartData(
-                  sections: [
-                    PieChartSectionData(
-                      color: const Color(0xFF66BB6A),
-                      title: '90',
-                      radius: 100.0,
-                      titleStyle: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+              SizedBox(height: 90.0),
+              Text('Nombre Poubelle : 90'),
+              SizedBox(height: 16.0),
+              Text('Nombre Poubelle Endommager: 40 '),
+              SizedBox(height: 16.0),
+              // Ajoutez ici le graphique (par exemple, PieChart)
+              Container(
+                height: 300.0,
+                child: PieChart(
+                  PieChartData(
+                    sections: [
+                      PieChartSectionData(
+                        color: const Color(0xFF66BB6A),
+                        title: '90',
+                        radius: 100.0,
+                        titleStyle: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    PieChartSectionData(
-                      color: const Color(0xFFE57373),
-                      title: '40',
-                      radius: 80.0,
-                      titleStyle: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                      PieChartSectionData(
+                        color: const Color(0xFFE57373),
+                        title: '40',
+                        radius: 80.0,
+                        titleStyle: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+
     );
   }
 }
