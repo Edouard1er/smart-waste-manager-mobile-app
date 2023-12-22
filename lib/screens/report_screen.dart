@@ -22,7 +22,7 @@ class _ReportScreenState extends State<ReportScreen> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            
+
             SizedBox(height: 25.0),
             Row(
               children: [

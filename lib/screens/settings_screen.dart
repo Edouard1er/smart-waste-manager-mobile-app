@@ -81,8 +81,8 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('VilleCollection'),
-              subtitle: Text('Configurer les rappels de collecte'),
+              title: Text('Historique de mes collecttes'),
+              subtitle: Text('Visualiser les dernières collectes'),
               onTap: () {
                 Navigator.of(context)
                     .pop(); // Fermer la boîte de dialogue actuelle
@@ -97,8 +97,8 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('Bienvenu'),
-              subtitle: Text('Configurer les rappels de collecte'),
+              title: Text('Préférences'),
+              subtitle: Text('Personnaliser l\'application'),
               onTap: () {
                 Navigator.of(context)
                     .pop(); // Fermer la boîte de dialogue actuelle
@@ -112,8 +112,8 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('Bienvenu Telephone'),
-              subtitle: Text('Configurer les rappels de collecte'),
+              title: Text('Confidentialités'),
+              subtitle: Text('Gérer mes données personnelles'),
               onTap: () {
                 Navigator.of(context)
                     .pop(); // Fermer la boîte de dialogue actuelle
@@ -128,8 +128,8 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('Bienvenu Quartier'),
-              subtitle: Text('Configurer les rappels de collecte'),
+              title: Text('Statistiques'),
+              subtitle: Text('Visualiser les statistiques de collecte'),
               onTap: () {
                 Navigator.of(context)
                     .pop(); // Fermer la boîte de dialogue actuelle
@@ -144,8 +144,8 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('Ajouter Agent'),
-              subtitle: Text('Configurer les rappels de collecte'),
+              title: Text('Faire un don'),
+              subtitle: Text('Aider nous à sensibiliser plus de personnes'),
               onTap: () {
                 Navigator.of(context)
                     .pop(); // Fermer la boîte de dialogue actuelle
@@ -160,8 +160,8 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('Statistique'),
-              subtitle: Text('Configurer les rappels de collecte'),
+              title: Text('A propos de nous'),
+              subtitle: Text('Apprendre à nous connaitre'),
               onTap: () {
                 Navigator.of(context)
                     .pop(); // Fermer la boîte de dialogue actuelle
@@ -174,41 +174,7 @@ class SettingsScreen extends StatelessWidget {
                 // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
               },
             ),
-            ListTile(
-              title: Text('MapInfo'),
-              subtitle: Text('Configurer les rappels de collecte'),
-              onTap: () {
-                Navigator.of(context)
-                    .pop(); // Fermer la boîte de dialogue actuelle
-                Navigator.push(
-                  context,
-                  // MaterialPageRoute(builder: (context) => NextCollectScreen(wasteBins: wasteBins)),
-                  MaterialPageRoute(
-                      builder: (context) => CollectMapInfoWidget(
-                            distance: '5km',
-                            time: '5',
-                            totalPoubelle: 6,
-                            totalMaison: 7,
-                            totalEndommage: 2,
-                            score: 2,
-                          )),
-                );
-                // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
-              },
-            ),
-              ListTile(
-              title: Text('Statistique'),
-              subtitle: Text('Configurer les rappels de collecte'),
-              onTap: () {
-                  Navigator.of(context).pop(); // Fermer la boîte de dialogue actuelle
-                Navigator.push(
-                  context,
-                  // MaterialPageRoute(builder: (context) => NextCollectScreen(wasteBins: wasteBins)),
-                    MaterialPageRoute(builder: (context) => Statistique(wasteBins: wasteBins)),
-                );
-                // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
-              },
-            ),
+
             // Ajoutez d'autres options de paramètres ici
           ],
         ),
