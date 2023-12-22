@@ -16,22 +16,13 @@ class _ReportScreenState extends State<ReportScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Signaler un Problème'),
+        title: Text('Signaler un problème'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            Center(
-              child: Text(
-                'SMART WAB',
-                style: TextStyle(
-                  fontSize: 36.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
-              ),
-            ),
+            
             SizedBox(height: 25.0),
             Row(
               children: [
@@ -64,7 +55,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               newValue; // Mettez à jour la valeur sélectionnée
                         });
                       },
-                      items: <String>['Endommager', 'Option 2', 'Option 3']
+                      items: <String>['Defectueux', 'Correct', "Endommagé"]
                           .map<DropdownMenuItem<String>>((String valuee) {
                         return DropdownMenuItem<String>(
                           value: valuee,
@@ -79,7 +70,7 @@ class _ReportScreenState extends State<ReportScreen> {
             SizedBox(height: 5.0),
             // Liste de CheckBox
             CheckboxListTile(
-              title: Text('Option 1'),
+              title: Text('Insalubrité'),
               value: option1Value,
               onChanged: (bool? value) {
                 setState(() {
@@ -88,7 +79,7 @@ class _ReportScreenState extends State<ReportScreen> {
               },
             ),
             CheckboxListTile(
-              title: Text('Option 2'),
+              title: Text('Encombrants'),
               value: option2Value,
               onChanged: (bool? value) {
                 setState(() {
@@ -97,7 +88,7 @@ class _ReportScreenState extends State<ReportScreen> {
               },
             ),
             CheckboxListTile(
-              title: Text('Option 3'),
+              title: Text("Présence animale"),
               value: option3Value,
               onChanged: (bool? value) {
                 setState(() {

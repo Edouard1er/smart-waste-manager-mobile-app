@@ -45,7 +45,7 @@ class _CollectionCalendarState extends State<CollectionCalendar> {
 
   List<DateTime> _getEvents() {
     return [
-      DateTime(2023, 12, 21, 10, 0),
+      DateTime(2023, 12, 30, 10, 0),
       DateTime(2023, 12, 24, 12, 0),
       DateTime(2023, 12, 29, 15, 0),
     ];

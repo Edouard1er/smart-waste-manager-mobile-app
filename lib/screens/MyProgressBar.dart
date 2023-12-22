@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MyProgressBar extends StatelessWidget {
-  final int percentage;
+  final double percentage;
 
   MyProgressBar({this.percentage = 50});
 
-  Color _getColorForPercentage(int percentage) {
-    if (percentage >= 97) {
+  Color _getColorForPercentage(double percentage) {
+    if (percentage >= 70) {
       return Colors.red;
     } else if (percentage >= 50) {
       return Colors.yellow;

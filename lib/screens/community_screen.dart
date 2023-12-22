@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_waste_manager_mobile_app/screens/education_screen.dart';
 
 class CommunityScreen extends StatefulWidget {
   @override
@@ -43,6 +44,10 @@ class _CommunityScreenState extends State<CommunityScreen> {
       child: ListTile(
         title: Text(discussion),
         onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EducationScreen()),
+          );
           // Ajoutez ici la logique pour naviguer vers l'écran de détails de la discussion
         },
       ),

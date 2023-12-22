@@ -1,45 +1,139 @@
 import 'package:flutter/material.dart';
+import 'package:smart_waste_manager_mobile_app/screens/calendar_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/collecteur_list_view.dart';
+import 'package:smart_waste_manager_mobile_app/screens/community_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/education_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/home_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/map_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/next_collection_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/order_tracking_page.dart';
+import 'package:smart_waste_manager_mobile_app/screens/report_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/settings_screen.dart';
+import 'package:smart_waste_manager_mobile_app/widgets/collection_calendar_widget.dart';
+import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+
+
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  final List<Widget> _screens = [
+    MapScreen(),
+    CollectionCalendar(),
+    CommunityScreen(),
+    NextCollectScreen(),
+    SettingsScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Smart Waste Manager'),
+      // appBar: AppBar(
+      //   // title: Text('Gestion des Déchets'),
+      // ),
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Carte',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Calendrier',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.group),
+            label: 'Communauté',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.lightbulb),
+            label: 'Collectes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
+          ),
+        ],
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.black,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Bienvenue dans Smart Waste Manager',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
               ),
-              textAlign: TextAlign.center,
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
             ),
-            SizedBox(height: 20.0),
-            // Affichez des informations pertinentes ici, par exemple :
-            Text(
-              'Fréquence de collecte du jour : Quotidienne',
-              style: TextStyle(fontSize: 16.0),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              'Conseil du jour : Réduisez votre empreinte carbone en recyclant vos déchets.',
-              style: TextStyle(fontSize: 16.0),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                // Naviguer vers la page de la carte ou une autre fonctionnalité
-                // En utilisant Navigator.push
+            ListTile(
+              leading: Icon(Icons.map),
+              title: Text('Carte'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 0; // Index de l'écran de la carte
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
               },
-              child: Text('Afficher la carte des poubelles'),
+            ),
+            ListTile(
+              leading: Icon(Icons.calendar_today),
+              title: Text('Calendrier'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 1; // Index de l'écran du calendrier
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.group),
+              title: Text('Communauté'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 2; // Index de l'écran de la communauté
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.lightbulb),
+              title: Text('Éducation'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 3; // Index de l'écran de l'éducation
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Profil'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 4; // Index de l'écran du profil
+                  Navigator.pop(context); // Fermer le menu latéral
+                });
+              },
             ),
           ],
         ),
@@ -47,3 +141,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+

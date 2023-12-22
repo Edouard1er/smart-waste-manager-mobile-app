@@ -3,6 +3,7 @@ import 'package:smart_waste_manager_mobile_app/screens/Bienvenu.dart';
 import 'package:smart_waste_manager_mobile_app/screens/BienvenuPhon.dart';
 import 'package:smart_waste_manager_mobile_app/screens/agentMatricule.dart';
 import 'package:smart_waste_manager_mobile_app/screens/choisirQuartier.dart';
+import 'package:smart_waste_manager_mobile_app/screens/home_screen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/statistiqueScreen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/ville_collection.dart';
 import 'package:smart_waste_manager_mobile_app/widgets/confirmation_dialog_widget.dart';
@@ -40,6 +41,15 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Paramètres'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -65,7 +75,7 @@ class SettingsScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          NextCollectScreen(wasteBins: wasteBins)),
+                          NextCollectScreen()),
                 );
                 // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
               },
@@ -96,7 +106,7 @@ class SettingsScreen extends StatelessWidget {
                   context,
                   // MaterialPageRoute(builder: (context) => NextCollectScreen(wasteBins: wasteBins)),
                   MaterialPageRoute(
-                      builder: (context) => Bienvenu(wasteBins: wasteBins)),
+                      builder: (context) => Bienvenu()),
                 );
                 // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
               },
@@ -112,7 +122,7 @@ class SettingsScreen extends StatelessWidget {
                   // MaterialPageRoute(builder: (context) => NextCollectScreen(wasteBins: wasteBins)),
                   MaterialPageRoute(
                       builder: (context) =>
-                          BienvenuPhone(wasteBins: wasteBins)),
+                          BienvenuPhone()),
                 );
                 // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
               },
@@ -128,7 +138,7 @@ class SettingsScreen extends StatelessWidget {
                   // MaterialPageRoute(builder: (context) => NextCollectScreen(wasteBins: wasteBins)),
                   MaterialPageRoute(
                       builder: (context) =>
-                          ChoixQuartier(wasteBins: wasteBins)),
+                          ChoixQuartier()),
                 );
                 // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
               },
@@ -144,7 +154,7 @@ class SettingsScreen extends StatelessWidget {
                   // MaterialPageRoute(builder: (context) => NextCollectScreen(wasteBins: wasteBins)),
                   MaterialPageRoute(
                       builder: (context) =>
-                          AgentMatricule(wasteBins: wasteBins)),
+                          AgentMatricule()),
                 );
                 // Ajoutez ici la logique pour naviguer vers l'écran de configuration des rappels
               },

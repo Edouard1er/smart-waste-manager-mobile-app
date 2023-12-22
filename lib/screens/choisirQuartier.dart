@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smart_waste_manager_mobile_app/models/waste_bin.dart';
+import 'package:smart_waste_manager_mobile_app/screens/agentMatricule.dart';
 import 'package:smart_waste_manager_mobile_app/screens/settings_screen.dart';
 
 class ChoixQuartier extends StatefulWidget {
-  final List<WasteBin> wasteBins;
 
-  ChoixQuartier({required this.wasteBins});
+  ChoixQuartier();
 
   @override
   _ChoixQuartierState createState() => _ChoixQuartierState();
@@ -18,14 +18,11 @@ class _ChoixQuartierState extends State<ChoixQuartier> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choisir Quartier'),
+        title: Text('Choisir ta ville par défaut'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingsScreen()),
-            );
+            Navigator.of(context).pop();
           },
         ),
       ),
@@ -73,7 +70,7 @@ class _ChoixQuartierState extends State<ChoixQuartier> {
                           newValue; // Mettez à jour la valeur sélectionnée
                     });
                   },
-                  items: <String>['Option 1', 'Option 2', 'Option 3']
+                  items: <String>['Olmeta di tuda', 'Rapale', 'Santu petro di tenda', 'Sorbo ocagnano']
                       .map<DropdownMenuItem<String>>((String valuee) {
                     return DropdownMenuItem<String>(
                       value: valuee,
@@ -95,6 +92,10 @@ class _ChoixQuartierState extends State<ChoixQuartier> {
                 ),
               ),
               onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AgentMatricule()),
+                );
                 // Action du bouton "AGENT"
                 // Vous pouvez définir le comportement souhaité ici
               },

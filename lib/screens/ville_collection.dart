@@ -12,15 +12,12 @@ class VilleCollection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quartier'),
+        title: Text('Liste des poubelles'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
         onPressed: () {
   // Action lorsque le bouton de retour est pressé
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => SettingsScreen()),
-  );
+  Navigator.of(context).pop();
 },
 
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_waste_manager_mobile_app/models/waste_bin.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_waste_manager_mobile_app/screens/order_tracking_page.dart';
 
 class WasteBinWidget extends StatelessWidget {
   final WasteBin wasteBin;
@@ -13,7 +14,7 @@ class WasteBinWidget extends StatelessWidget {
     Color textColor; // Couleur globale du texte
     Color dateColor;
     // Déterminer la couleur en fonction du niveau de remplissage
-    if (wasteBin.fillLevel >= 0.97) {
+    if (wasteBin.fillLevel >= 0.7) {
       cardColor = Colors.red;
       textColor = Colors.white; // Texte en blanc lorsque le niveau est élevé
       dateColor = Colors.white;
@@ -52,25 +53,21 @@ class WasteBinWidget extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold,fontSize:25 ,color: dateColor), // Date en vert
             ),
             Text(
-              'Fill Level: ${wasteBin.fillLevel}',
+              'Niveau de remplissage moyen des poubelles: ${wasteBin.fillLevel * 100.0}%',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: textColor), // Appliquer la couleur du texte
             ),
-            Text(
-              'Status: ${wasteBin.status}',
-              style:
-                  TextStyle(color: textColor), // Appliquer la couleur du texte
-            ),
+
           ],
         ),
         onTap: () {
           // Action when a waste bin is tapped
           // For example, navigate to details screen
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => BinDetailsScreen(bin: wasteBin)),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => OrderTrackingPage()),
+          );
         },
       ),
     );

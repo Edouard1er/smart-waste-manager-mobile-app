@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:smart_waste_manager_mobile_app/models/waste_bin.dart';
+import 'package:smart_waste_manager_mobile_app/screens/BienvenuPhon.dart';
+import 'package:smart_waste_manager_mobile_app/screens/choisirQuartier.dart';
 import 'package:smart_waste_manager_mobile_app/screens/settings_screen.dart';
 
 class Bienvenu extends StatelessWidget {
-  final List<WasteBin> wasteBins;
 
-  Bienvenu({required this.wasteBins});
+
+  Bienvenu();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bienvenue'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            // Action lorsque le bouton de retour est pressé
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingsScreen()),
-            );
-          },
-        ),
-      ),
+
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -31,7 +21,7 @@ class Bienvenu extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(67.0),
               child: Text(
-                'Bienvenue sur ',
+                'Bienvenue',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -55,6 +45,10 @@ class Bienvenu extends StatelessWidget {
             bottom: 150.0,
             child: ElevatedButton(
               onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ChoixQuartier()),
+                );
                 // Action du bouton "Commencer"
                 // Vous pouvez définir le comportement souhaité ici
               },

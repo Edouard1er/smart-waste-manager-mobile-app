@@ -16,11 +16,17 @@ class _MapScreenState extends State<MapScreen> {
   GoogleMapController? _mapController;
   List<Marker> _markers = [];
 
+
   List<WasteBin> wasteBins = [
+
     WasteBin(id: 1, latitude: 37.7749, longitude: -122.4214, fillLevel: 0.7, nextCollectionDate: DateTime.now(), status: ''),
     WasteBin(id: 2, latitude: 37.7839, longitude: -122.4214, fillLevel: 0.5, nextCollectionDate: DateTime.now(), status: ''),
-    WasteBin(id: 3, latitude: 37.7839, longitude: -122.4218, fillLevel: 0.3, nextCollectionDate: DateTime.now(), status: ''),
+    WasteBin(id: 3, latitude: 34.7839, longitude: -122.4218, fillLevel: 0.3, nextCollectionDate: DateTime.now(), status: ''),
+    WasteBin(id: 4, latitude: 37.7749, longitude: -122.4114, fillLevel: 0.7, nextCollectionDate: DateTime.now(), status: ''),
+    WasteBin(id: 5, latitude: 37.7839, longitude: -122.8414, fillLevel: 0.5, nextCollectionDate: DateTime.now(), status: ''),
+    WasteBin(id: 6, latitude: 37.7839, longitude: -122.4518, fillLevel: 0.3, nextCollectionDate: DateTime.now(), status: ''),
   ];
+
 
   @override
   void initState() {
@@ -65,8 +71,9 @@ class _MapScreenState extends State<MapScreen> {
           });
         },
         markers: Set<Marker>.from(_markers),
-        initialCameraPosition: CameraPosition(
+        initialCameraPosition: const CameraPosition(
           target: LatLng(37.7749, -122.4194),
+
           zoom: 12.0,
         ),
       ),
@@ -147,7 +154,7 @@ class _MapScreenState extends State<MapScreen> {
                 Navigator.of(context).pop(); // Fermer la boîte de dialogue actuelle
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OrderTrackingPage()),
+                  MaterialPageRoute(builder: (context) => ReportScreen()),
                 );
               },
               child: Text('Signaler quelque chose'),

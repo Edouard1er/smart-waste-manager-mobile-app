@@ -37,13 +37,8 @@ class WasteBinWidgetVilleCollect extends StatelessWidget {
                   TextStyle(color: Colors.black), // Appliquer la couleur du texte
             ),
           
-            Text(
-              'Fill Level: ${wasteBin.fillLevel}',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black), // Appliquer la couleur du texte
-            ),
-            MyProgressBar(percentage: 5)
+
+            MyProgressBar(percentage: wasteBin.fillLevel * 100.0),
           ],
         ),
         onTap: () {
