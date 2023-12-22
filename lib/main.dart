@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_waste_manager_mobile_app/screens/add_collecteur.dart';
 import 'package:smart_waste_manager_mobile_app/screens/calendar_screen.dart';
 import 'package:smart_waste_manager_mobile_app/screens/collecteur_list_view.dart';
 import 'package:smart_waste_manager_mobile_app/screens/community_screen.dart';
@@ -40,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     MapScreen(),
     CollectionCalendar(),
-    AddCollecteurView(),
+    CollecteurListView(),
     OrderTrackingPage(),
     SettingsScreen(),
   ];

@@ -14,7 +14,7 @@ class CollecteurService {
       body: jsonEncode(data),
     );
 
-    return _handleResponseCollecteur(response);
+    return _handleResponseAdd(response);
   }
 
   Future<List<Collecteur>> getAllCollecteurs()  async {
@@ -55,7 +55,7 @@ class CollecteurService {
     }
   }
 
-  Collecteur _handleResponseCollecteur(http.Response response) {
+  Collecteur _handleResponseAdd(http.Response response) {
     final dynamic responseData = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
@@ -65,5 +65,7 @@ class CollecteurService {
       throw Exception('Failed to load data');
     }
   }
+
+
 
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_waste_manager_mobile_app/models/collecteur.dart';
 import 'package:smart_waste_manager_mobile_app/services/collecteur_service.dart';
+import 'package:smart_waste_manager_mobile_app/widgets/collecteur_item.dart';
 
 class CollecteurListView extends StatefulWidget {
   @override
@@ -29,6 +30,20 @@ class _CollecteurListViewState extends State<CollecteurListView> {
     }
   }
 
+  // Fonction pour gérer la suppression d'un collecteur
+  Future<void> deleteCollecteur(String collecteurId) async {
+    try {
+      await collecteurService.deleteCollecteur(collecteurId);
+      print('Collecteur supprimé avec succès');
+      setState(() {
+        // Mettez à jour la liste après la suppression
+        collecteurs = getCollecteurs();
+      });
+    } catch (e) {
+      print('Erreur lors de la suppression du collecteur : $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +62,9 @@ class _CollecteurListViewState extends State<CollecteurListView> {
             return ListView.builder(
               itemCount: collecteursData.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(collecteursData[index].nom ?? ''),
-                  // Ajoutez d'autres éléments d'interface utilisateur en fonction des données du collecteur
+                return CollecteurItem(
+                  collecteur: collecteursData[index],
+                  onDelete: deleteCollecteur, // Fournir la fonction onDelete
                 );
               },
             );
