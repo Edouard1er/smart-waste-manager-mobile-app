@@ -7,14 +7,14 @@ class CollecteurService {
 
 
 
-  Future<List<Collecteur>> addCollecteur(Map<String, dynamic> data) async {
+  Future<Collecteur> addCollecteur(Map<String, dynamic> data) async {
     final response = await http.post(
       Uri.parse('$baseUrl/collecteurs'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(data),
     );
 
-    return _handleResponse(response);
+    return _handleResponseCollecteur(response);
   }
 
   Future<List<Collecteur>> getAllCollecteurs()  async {
@@ -54,4 +54,16 @@ class CollecteurService {
       throw Exception('Failed to load data');
     }
   }
+
+  Collecteur _handleResponseCollecteur(http.Response response) {
+    final dynamic responseData = jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      Collecteur collecteur = Collecteur.fromJson(responseData);
+      return collecteur;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
 }
