@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_waste_manager_mobile_app/screens/education_screen.dart';
+import 'package:smart_waste_manager_mobile_app/screens/home_screen.dart';
 
 class CommunityScreen extends StatefulWidget {
   @override
@@ -19,6 +20,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Communauté / Forum'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
