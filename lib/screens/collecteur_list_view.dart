@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_waste_manager_mobile_app/models/collecteur.dart';
+import 'package:smart_waste_manager_mobile_app/screens/edit_collecteur.dart';
 import 'package:smart_waste_manager_mobile_app/services/collecteur_service.dart';
 import 'package:smart_waste_manager_mobile_app/widgets/collecteur_item.dart';
 
@@ -44,6 +45,24 @@ class _CollecteurListViewState extends State<CollecteurListView> {
     }
   }
 
+  // Fonction pour gérer l'édition d'un collecteur
+  void editCollecteur(Collecteur collecteur) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditCollecteurView(collecteur: collecteur),
+      ),
+    );
+
+    // Mettez à jour la liste si le collecteur a été modifié
+    if (result != null && result is Collecteur) {
+      setState(() {
+        collecteurs = getCollecteurs();
+      });
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +83,8 @@ class _CollecteurListViewState extends State<CollecteurListView> {
               itemBuilder: (context, index) {
                 return CollecteurItem(
                   collecteur: collecteursData[index],
-                  onDelete: deleteCollecteur, // Fournir la fonction onDelete
+                  onDelete: deleteCollecteur,
+                  onEdit: () => editCollecteur(collecteursData[index])// Fournir la fonction onDelete
                 );
               },
             );

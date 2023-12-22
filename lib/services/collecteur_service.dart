@@ -27,14 +27,14 @@ class CollecteurService {
     return _handleResponse(response);
   }
 
-  Future<List<Collecteur>> updateCollecteur(String collecteurId, Map<String, dynamic> data) async {
+  Future<Collecteur> updateCollecteur(String collecteurId, Map<String, dynamic> data) async {
     final response = await http.put(
       Uri.parse('$baseUrl/collecteurs/$collecteurId'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(data),
     );
 
-    return _handleResponse(response);
+    return _handleResponseAdd(response);
   }
 
   Future<void> deleteCollecteur(String collecteurId) async {
