@@ -44,7 +44,7 @@ class CollectMapInfoWidget extends StatelessWidget {
           children: [
               Center(
               child: Text(
-                'SMART WAB',
+                'MAP',
                 style: TextStyle(
                   fontSize: 36.0,
                   fontWeight: FontWeight.bold,
